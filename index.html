@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brahmastra — Turn Your Syllabus Into a Printable Cheatsheet</title>
+<meta name="description" content="Paste your syllabus, Brahmastra extracts what matters and hands you a print-ready exam cheatsheet in seconds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 12h5l-2 10 9-12h-5l1-8z" fill="#FF7A28"/></svg>
+      BRAHMASTRA
+    </a>
+    <div class="nav-links">
+      <a href="index.html#features">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="dashboard.html">Go to app</a>
+      <a href="dashboard.html" class="btn btn-fire btn-sm">Create cheatsheet</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Built for the night before the exam</div>
+    <h1>One shot.<br>Every topic that <em>actually matters</em>.</h1>
+    <p class="lead">Paste whatever your professor handed you. Brahmastra reads it, finds the real topics, and releases a compact, print-ready cheatsheet — in about twenty seconds.</p>
+    <form class="quick-generate" id="quick-generate-form">
+      <textarea id="quick-syllabus" aria-label="Paste your syllabus" placeholder="Paste a unit, chapter list, or complete syllabus here…"></textarea>
+      <div class="quick-generate-footer">
+        <span>Topics are detected automatically.</span>
+        <button class="btn btn-fire" type="submit">Generate cheatsheet <span aria-hidden="true">→</span></button>
+      </div>
+    </form>
+    <div class="hero-cta hero-secondary-cta">
+      <a href="pricing.html" class="btn btn-ghost">See pricing</a>
+    </div>
+    <div class="hero-meta">No card needed · Print-ready in ~20s · PDF &amp; DOCX</div>
+
+    <div class="bow-wrap">
+      <svg class="bow-svg" viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg">
+        <path class="bow-string" d="M40 30 Q 320 100 40 170" fill="none"/>
+        <line class="bow-arrow-line bow-glow" x1="60" y1="100" x2="560" y2="100"/>
+        <polygon class="bow-arrowhead bow-glow" points="560,100 535,88 535,112"/>
+        <circle class="bow-node active" cx="120" cy="100" r="16"/>
+        <text class="bow-label" x="120" y="140" text-anchor="middle">SYLLABUS</text>
+        <circle class="bow-node active" cx="300" cy="100" r="16"/>
+        <text class="bow-label" x="300" y="140" text-anchor="middle">TOPICS FOUND</text>
+        <circle class="bow-node" cx="470" cy="100" r="16"/>
+        <text class="bow-label" x="470" y="140" text-anchor="middle">CHEATSHEET</text>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">What it does</div>
+      <h2>Six things, done well</h2>
+      <p>Nothing it doesn't do — no bloated editor, no template gallery, no fluff.</p>
+    </div>
+    <div class="grid-3">
+      <div class="feature"><div class="num">01</div><h3>AI topic extraction</h3><p>Reads a messy syllabus and pulls out the distinct topics that actually matter.</p></div>
+      <div class="feature"><div class="num">02</div><h3>Customisable depth</h3><p>3, 5, or 10 points per topic — definitions, formulas, or examples, your call.</p></div>
+      <div class="feature"><div class="num">03</div><h3>Live preview</h3><p>Your cheatsheet renders as you change settings. No waiting, no surprises.</p></div>
+      <div class="feature"><div class="num">04</div><h3>Print-true layouts</h3><p>Standard page, 4×2 landscape cards, or 3×3 pocket cards — measured against real paper.</p></div>
+      <div class="feature"><div class="num">05</div><h3>PDF &amp; DOCX export</h3><p>Print at the shop, or open in Word and tweak before you print.</p></div>
+      <div class="feature"><div class="num">06</div><h3>Free to try</h3><p>No account needed to preview. Sign in only when you're ready to download.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">How it works</div>
+      <h2>Four steps, one credit</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="step-num">01</span><h4>Paste syllabus</h4><p>Formatting doesn't matter — we parse it either way.</p></div>
+      <div class="step"><span class="step-num">02</span><h4>Pick detail level</h4><p>Three, five, or ten points per topic, depending on time left.</p></div>
+      <div class="step"><span class="step-num">03</span><h4>Choose layout</h4><p>Standard page, landscape cards, or pocket cards.</p></div>
+      <div class="step"><span class="step-num">04</span><h4>Download &amp; print</h4><p>Grab the PDF or DOCX, cut, and start revising.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Credits</div>
+      <h2>1 credit = 1 complete cheatsheet</h2>
+      <p>One free credit on signup. Buy more only when you need them — credits never expire.</p>
+    </div>
+    <a href="pricing.html" class="btn btn-ghost">See full pricing →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div>
+      <div class="brand" style="margin-bottom:10px;">
+        <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 12h5l-2 10 9-12h-5l1-8z" fill="#FF7A28"/></svg>
+        BRAHMASTRA
+      </div>
+      <p style="max-width:260px;">Paste a syllabus, get a printable revision sheet. Built for students who ran out of time.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h5>Product</h5>
+        <a href="index.html#features">Features</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="dashboard.html">Go to app</a>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:32px;">© 2026 Brahmastra.</div>
+</footer>
+
+<script src="js/landing.js"></script>
+</body>
+</html>

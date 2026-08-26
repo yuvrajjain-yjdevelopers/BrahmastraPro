@@ -1,0 +1,10 @@
+{
+  "name": "brahmastra",
+  "version": "1.0.0",
+  "description": "AI cheat sheet generator from your syllabus.",
+  "private": true,
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "razorpay": "^2.9.4"
+  }
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing — Brahmastra</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <svg class="mark" viewBox="0 0 24 24" fill="none"><path d="M12 2L4 12h5l-2 10 9-12h-5l1-8z" fill="#FF7A28"/></svg>
+      BRAHMASTRA
+    </a>
+    <div class="nav-links">
+      <a href="index.html#features">Features</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="dashboard.html" class="btn btn-fire btn-sm">Create cheatsheet</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" style="padding-bottom:40px;">
+  <div class="wrap">
+    <div class="eyebrow">Credits, not subscriptions</div>
+    <h1 style="font-size:clamp(2rem,4vw,3rem);">Pay for cheatsheets, not months.</h1>
+    <p class="lead">1 credit makes 1 complete cheatsheet — PDF and DOCX included. Credits never expire.</p>
+  </div>
+</header>
+
+<section style="border-top:none; padding-top:0;">
+  <div class="wrap">
+    <div class="pricing-grid" id="pricing-grid">
+      <div class="price-card" data-credits="1" data-amount="1500">
+        <div class="price-per">Starter</div>
+        <div class="price-credits">1</div>
+        <div class="price-per">credit</div>
+        <div class="price-amount">₹15</div>
+        <div class="price-per">₹15 / sheet</div>
+        <button class="btn btn-ghost btn-sm buy-btn" style="width:100%;">Buy</button>
+      </div>
+      <div class="price-card" data-credits="3" data-amount="4300">
+        <div class="price-per">&nbsp;</div>
+        <div class="price-credits">3</div>
+        <div class="price-per">credits</div>
+        <div class="price-amount">₹43</div>
+        <div class="price-per">₹14.33 / sheet</div>
+        <button class="btn btn-ghost btn-sm buy-btn" style="width:100%;">Buy</button>
+      </div>
+      <div class="price-card popular" data-credits="5" data-amount="7000">
+        <div class="price-badge">Popular</div>
+        <div class="price-credits">5</div>
+        <div class="price-per">credits</div>
+        <div class="price-amount">₹70</div>
+        <div class="price-per">₹14 / sheet</div>
+        <button class="btn btn-fire btn-sm buy-btn" style="width:100%;">Buy</button>
+      </div>
+      <div class="price-card" data-credits="10" data-amount="14000">
+        <div class="price-per">Best value</div>
+        <div class="price-credits">10</div>
+        <div class="price-per">credits</div>
+        <div class="price-amount">₹140</div>
+        <div class="price-per">₹14 / sheet</div>
+        <button class="btn btn-ghost btn-sm buy-btn" style="width:100%;">Buy</button>
+      </div>
+    </div>
+    <p style="margin-top:24px;color:var(--text-muted);font-size:0.85rem;">Sign in on the <a href="dashboard.html" style="color:var(--fire-hot);">dashboard</a> first — purchases are attached to your account.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 Brahmastra.</div>
+</footer>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/payments.js"></script>
+</body>
+</html>

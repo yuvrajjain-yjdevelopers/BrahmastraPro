@@ -1,0 +1,8 @@
+# Local credentials
+.env
+.env.*
+!.env.example
+
+# Dependencies and local Netlify state
+node_modules/
+.netlify/
