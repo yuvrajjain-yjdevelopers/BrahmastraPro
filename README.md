@@ -1,9 +1,9 @@
 # Brahmastra — setup & deploy guide
 
 This is a full working clone-style app: paste a syllabus → AI extracts topics →
-print-ready cheatsheet (PDF/DOCX), with real accounts, credits, and payments.
+print-ready cheatsheet (PDF/DOCX), with accounts and three free credits per new user.
 
-You need to wire up **3 free/low-cost services** before it works. Takes ~20 minutes.
+You need to wire up the AI providers and Supabase before it works.
 
 ---
 
@@ -58,7 +58,7 @@ existing `GROQ_API_KEY` keeps working — no code changes needed.
 -- profiles table: 1 row per user, tracks credits
 create table profiles (
   id uuid references auth.users on delete cascade primary key,
-  credits integer not null default 1,
+  credits integer not null default 3,
   created_at timestamp with time zone default now()
 );
 
@@ -68,11 +68,11 @@ create policy "Users can view their own profile"
   on profiles for select
   using (auth.uid() = id);
 
--- auto-create a profile with 1 free credit whenever someone signs up
+-- auto-create a profile with 3 free credits whenever someone signs up
 create function public.handle_new_user()
 returns trigger as $$
 begin
-  insert into public.profiles (id, credits) values (new.id, 1);
+  insert into public.profiles (id, credits) values (new.id, 3);
   return new;
 end;
 $$ language plpgsql security definer;
@@ -90,27 +90,11 @@ create trigger on_auth_user_created
 
 ---
 
-## 3. Razorpay — payments (India)
+## 3. Deploy to Vercel
 
-1. Go to https://razorpay.com → sign up → complete KYC to accept real payments
-   (you can use **Test Mode** immediately without KYC to try the whole flow).
-2. Go to **Settings → API Keys** → generate Test (or Live) keys.
-3. You'll need `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET` for Netlify env vars.
-
-While in Test Mode, use Razorpay's test card `4111 1111 1111 1111`, any future
-expiry, any CVV, to simulate a payment.
-
----
-
-## 4. Deploy to Netlify
-
-1. Push this folder to a GitHub repo (or drag-and-drop deploy on Netlify — but
-   drag-and-drop won't pick up the `netlify/functions` folder correctly for
-   npm dependencies, so a GitHub-connected deploy is strongly recommended).
-2. On https://app.netlify.com → **Add new site → Import from Git** → pick the repo.
-3. Build settings: leave build command empty, publish directory `.`
-   (already set in `netlify.toml`).
-4. Go to **Site settings → Environment variables** and add:
+1. Push this folder to a GitHub repository.
+2. On https://vercel.com/new, import that repository and deploy it.
+3. In **Project Settings → Environment Variables**, add:
 
    | Key | Value |
    |---|---|
@@ -120,17 +104,13 @@ expiry, any CVV, to simulate a payment.
    | `GEMINI_MODEL` | `gemini-3.6-flash` (optional, this is the default) |
    | `SUPABASE_URL` | from step 2 |
    | `SUPABASE_SERVICE_ROLE_KEY` | from step 2 (service_role, NOT anon) |
-   | `RAZORPAY_KEY_ID` | from step 3 |
-   | `RAZORPAY_KEY_SECRET` | from step 3 |
-
    **Important:** set both `GROQ_API_KEY` and `GEMINI_API_KEY` for the
-   Production deploy context (and Preview/Branch contexts too, if you test
-   there). A missing or invalid Gemini key means a Groq rate limit will show
-   the “heavy traffic” message instead of generating the sheet.
+   Production environment (and Preview too, if you test there).
 
-5. Deploy. Netlify will auto-install `@supabase/supabase-js` and `razorpay`
-   from `package.json` for the functions.
-6. Visit your live URL — sign up, paste a syllabus, generate.
+4. Deploy. Vercel automatically installs the dependencies and deploys the
+   `/api` functions.
+5. Run [`supabase/free-plan.sql`](supabase/free-plan.sql) once in Supabase SQL
+   Editor to give every new account three free credits.
 
 ---
 
@@ -138,13 +118,11 @@ expiry, any CVV, to simulate a payment.
 
 - ✅ Real AI extraction (Groq, with automatic Gemini fallback on rate limits)
 - ✅ Real accounts + row-level-secured credit balances (Supabase)
-- ✅ Real payment verification (Razorpay signature check happens server-side)
+- ✅ Three free credits for every new account; no payment flow or subscriptions
 - ✅ Real PDF/DOCX export, generated in the browser (jsPDF / docx.js)
 - ⚠️ Email confirmation is on by default in Supabase — turn off for a smoother
   demo, or leave on for production.
 - ⚠️ `privacy.html` / `terms.html` are placeholders — replace before real users sign up.
-- ⚠️ Razorpay needs completed KYC before it can accept **real** money; Test Mode
-  works immediately for demos.
 
 ---
 
@@ -153,18 +131,17 @@ expiry, any CVV, to simulate a payment.
 ```
 brahmastra/
 ├── index.html            landing page
-├── pricing.html          pricing + buy flow
+├── pricing.html          free-plan information
 ├── dashboard.html        the app (syllabus → cheatsheet)
 ├── privacy.html / terms.html
 ├── css/style.css
 ├── js/
 │   ├── supabase-client.js   ← paste your Supabase URL/key here
 │   ├── dashboard.js          app logic, PDF/DOCX export
-│   └── payments.js           Razorpay checkout flow
+├── api/
+│   └── generate.js           Vercel generator endpoint
 ├── netlify/functions/
-│   ├── generate.js           calls Groq, deducts a credit
-│   ├── create-order.js       creates a Razorpay order
-│   └── verify-payment.js     verifies payment, tops up credits
-├── netlify.toml
+│   └── generate.js           shared generator logic
+├── supabase/free-plan.sql    three-credit database setup
 └── package.json
 ```

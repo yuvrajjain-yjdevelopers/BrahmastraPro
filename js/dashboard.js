@@ -104,7 +104,7 @@ function updateAuthUI() {
   } else {
     authBox.style.display = "block";
     logoutBtn.style.display = "none";
-    creditBadge.textContent = "— credits";
+    creditBadge.textContent = "3 free credits";
   }
 }
 
@@ -115,7 +115,7 @@ async function refreshCredits() {
     .eq("id", currentUser.id)
     .single();
   if (!error && data) {
-    creditBadge.textContent = `${data.credits} credit${data.credits === 1 ? "" : "s"}`;
+    creditBadge.textContent = `${data.credits} free credit${data.credits === 1 ? "" : "s"}`;
   }
 }
 

@@ -4,7 +4,6 @@
   "description": "AI cheat sheet generator from your syllabus.",
   "private": true,
   "dependencies": {
-    "@supabase/supabase-js": "^2.45.0",
-    "razorpay": "^2.9.4"
+    "@supabase/supabase-js": "^2.45.0"
   }
 }

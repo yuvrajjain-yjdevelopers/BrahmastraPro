@@ -106,7 +106,7 @@ exports.handler = async (event) => {
       return { statusCode: 400, body: JSON.stringify({ error: "No profile found. Contact support." }) };
     }
     if (profile.credits < 1) {
-      return { statusCode: 402, body: JSON.stringify({ error: "Out of credits. Buy more to continue." }) };
+      return { statusCode: 402, body: JSON.stringify({ error: "You've used your 3 free cheatsheets for this account." }) };
     }
 
     const { syllabus, depth, focus } = JSON.parse(event.body || "{}");
