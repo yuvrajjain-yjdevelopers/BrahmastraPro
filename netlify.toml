@@ -1,6 +1,10 @@
 [build]
   publish = "."
-  functions = "netlify/functions"
+
+# Keep this explicit for Git-based deploys. Without a Functions directory,
+# Netlify can publish the static site while omitting the generator endpoint.
+[functions]
+  directory = "netlify/functions"
 
 [[redirects]]
   from = "/*"

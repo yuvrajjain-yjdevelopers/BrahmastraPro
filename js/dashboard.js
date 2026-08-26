@@ -2,7 +2,7 @@
 // BRAHMASTRA — dashboard logic
 // IMPORTANT: this NEVER calls api.anthropic.com or any AI provider
 // directly from the browser. All AI calls go through our own
-// Netlify function (/.netlify/functions/generate), which holds
+// Vercel serverless function (/api/generate), which holds
 // the real API key server-side. Calling an AI API straight from
 // client-side JS can't work outside Claude's own artifact sandbox —
 // there's no key to send, and the provider blocks browser-origin
@@ -191,7 +191,7 @@ generateBtn.addEventListener("click", async () => {
   preview.innerHTML = `<div class="empty-state">Charging the arrow...</div>`;
 
   try {
-    const res = await fetch("/.netlify/functions/generate", {
+    const res = await fetch("/api/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -203,7 +203,19 @@ generateBtn.addEventListener("click", async () => {
         focus: selectedFocus
       })
     });
-    const data = await res.json();
+    // Netlify may return an HTML 404/500 page if a deployment is missing its
+    // serverless function. Parse defensively so users see a useful action
+    // instead of the browser's "Unexpected token <" JSON parsing error.
+    const responseBody = await res.text();
+    let data;
+    try {
+      data = JSON.parse(responseBody);
+    } catch {
+      if (res.status === 404) {
+        throw new Error("Generator service is not deployed yet. Redeploy the Netlify site with its functions enabled.");
+      }
+      throw new Error(`Generator service returned an invalid response (${res.status}). Please try again shortly.`);
+    }
     if (!res.ok) throw new Error(data.error || "Generation failed.");
 
     lastResult = data;

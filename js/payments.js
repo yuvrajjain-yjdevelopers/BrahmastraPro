@@ -19,7 +19,7 @@ document.querySelectorAll(".buy-btn").forEach(btn => {
     btn.textContent = "Loading...";
 
     try {
-      const orderRes = await fetch("/.netlify/functions/create-order", {
+      const orderRes = await fetch("/api/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
         body: JSON.stringify({ amount: Number(amount), credits: Number(credits) })
@@ -35,7 +35,7 @@ document.querySelectorAll(".buy-btn").forEach(btn => {
         description: `${credits} credit${credits > 1 ? "s" : ""}`,
         order_id: order.orderId,
         handler: async function (response) {
-          const verifyRes = await fetch("/.netlify/functions/verify-payment", {
+          const verifyRes = await fetch("/api/verify-payment", {
             method: "POST",
             headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
             body: JSON.stringify({
